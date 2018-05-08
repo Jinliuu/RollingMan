@@ -2,18 +2,65 @@
 using System.Collections;
 
 public class Finish : MonoBehaviour {
-    public GameObject Player;
-    public GameObject nextLevel;
+    GameObject Player;
+    GameObject nextLevel;
+    public string gameObjectname;
     Transform currentLevel;
+    GameObject levels;
     public GameObject centre;
-    public GameObject fade;
-    public GameObject Fix;
+    GameObject fade;
+    GameObject Fix;
     public int nextLevelfixSize;
 	void Start(){
+        fade = GameObject.Find("Levels").transform.GetChild(1).gameObject;
+        Fix = GameObject.Find("HUD").transform.GetChild(0).gameObject;
+        gameObjectname = gameObject.transform.parent.gameObject.name;
+        gameObjectname = gameObjectname.Substring(0, 6);
+        FindLevel();
         currentLevel = gameObject.transform.parent;
-        
+        levels = gameObject.transform.parent.parent.parent.gameObject;
+        Player = levels.transform.GetChild(2).gameObject;
 
 	}
+    void FindLevel()
+    {
+        Debug.Log(gameObjectname);
+        if(gameObjectname == "Level1")
+        {
+            nextLevel = GameObject.Find("Levels").transform.GetChild(3).transform.Find("Level2").gameObject;
+           
+        }
+        else if (gameObjectname == "Level2")
+        {
+            nextLevel = GameObject.Find("Levels").transform.GetChild(3).transform.Find("Level3").gameObject;
+
+        }
+        else if (gameObjectname == "Level3")
+        {
+            nextLevel = GameObject.Find("Levels").transform.GetChild(3).transform.Find("Level4").gameObject;
+
+        }
+        else if (gameObjectname == "Level4")
+        {
+            nextLevel = GameObject.Find("Levels").transform.GetChild(3).transform.Find("Level5").gameObject;
+
+        }
+        else if (gameObjectname == "Level5")
+        {
+            nextLevel = GameObject.Find("Levels").transform.GetChild(3).transform.Find("Level6").gameObject;
+
+        }
+        else if (gameObjectname == "Level6")
+        {
+            nextLevel = GameObject.Find("Levels").transform.GetChild(3).transform.Find("Level7").gameObject;
+
+        }
+        else if (gameObjectname == "Level7")
+        {
+            nextLevel = GameObject.Find("Levels").transform.GetChild(3).transform.Find("Level8").gameObject;
+
+        }
+    }
 	
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.name == "Player")
@@ -47,6 +94,7 @@ public class Finish : MonoBehaviour {
 
     void loadLevel()
     {
+        Debug.Log(nextLevel.name);
         nextLevel.SetActive(true);
         Player.transform.position = nextLevel.transform.Find("StartPoint").transform.position;
         Player.GetComponent<Animator>().SetTrigger("New");

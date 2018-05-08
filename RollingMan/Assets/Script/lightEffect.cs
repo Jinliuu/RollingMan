@@ -26,7 +26,7 @@ public class lightEffect : MonoBehaviour {
             {
                 myAnimator.SetTrigger("flash");
                 ifCool = true;
-                cdcounter.cd = 6;
+                cdcounter.cd = 3;
                
             }
         }
